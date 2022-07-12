@@ -1,0 +1,33 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+<table>
+    <tr>
+        <th>BookName</th>
+        <th>NumberOfCopies</th>
+        <th>AuthorName</th>
+    </tr>
+    {{#each userData}}
+    <tr>
+        <td>{{bname}}</td>
+        <td>{{ncopy}}</td>
+        <td>{{aname}}</td>
+        <td><button type="button" class="btn-delete" id="{{id}}" >Delete </td>
+    </tr>
+    {{/each}}
+</table>
+<style>
+table, th, td {
+  border: 1px solid;
+}
+</style>
+
+<script>
+    $(".btn-delete").click((event)=>{
+    $.post('/delete', {id:event.target.id}).then((data)=>{
+       if(data.code ==1){
+           location.reload();
+           }else{
+           alert("not deleted")
+       }
+    })
+})
+</script>
